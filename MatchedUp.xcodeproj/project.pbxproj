@@ -22,6 +22,9 @@
 		5D79A7BF19703012009F33AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79E19703012009F33AA /* UIKit.framework */; };
 		5D79A7C719703012009F33AA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5D79A7C519703012009F33AA /* InfoPlist.strings */; };
 		5D79A7C919703012009F33AA /* MatchedUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A7C819703012009F33AA /* MatchedUpTests.m */; };
+		5D79A7D4197032AE009F33AA /* KHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A7D3197032AE009F33AA /* KHLoginViewController.m */; };
+		5DCCA55A1971A97C001CDE38 /* KHConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DCCA5591971A97C001CDE38 /* KHConstants.m */; };
+		87B29151D78147B78D95A639 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4910057E96A4BE481E09963 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,12 @@
 		5D79A7C419703012009F33AA /* MatchedUpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MatchedUpTests-Info.plist"; sourceTree = "<group>"; };
 		5D79A7C619703012009F33AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5D79A7C819703012009F33AA /* MatchedUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchedUpTests.m; sourceTree = "<group>"; };
+		5D79A7D2197032AE009F33AA /* KHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KHLoginViewController.h; sourceTree = "<group>"; };
+		5D79A7D3197032AE009F33AA /* KHLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHLoginViewController.m; sourceTree = "<group>"; };
+		5DCCA5581971A97C001CDE38 /* KHConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KHConstants.h; sourceTree = "<group>"; };
+		5DCCA5591971A97C001CDE38 /* KHConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHConstants.m; sourceTree = "<group>"; };
+		5FDB8757FF334EBE976C4A38 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C4910057E96A4BE481E09963 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +75,7 @@
 				5D79A79D19703012009F33AA /* CoreGraphics.framework in Frameworks */,
 				5D79A79F19703012009F33AA /* UIKit.framework in Frameworks */,
 				5D79A79B19703012009F33AA /* Foundation.framework in Frameworks */,
+				87B29151D78147B78D95A639 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +99,7 @@
 				5D79A7C219703012009F33AA /* MatchedUpTests */,
 				5D79A79919703012009F33AA /* Frameworks */,
 				5D79A79819703012009F33AA /* Products */,
+				5FDB8757FF334EBE976C4A38 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +119,7 @@
 				5D79A79C19703012009F33AA /* CoreGraphics.framework */,
 				5D79A79E19703012009F33AA /* UIKit.framework */,
 				5D79A7BC19703012009F33AA /* XCTest.framework */,
+				C4910057E96A4BE481E09963 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -118,6 +130,7 @@
 				5D79A7A919703012009F33AA /* KHAppDelegate.h */,
 				5D79A7AA19703012009F33AA /* KHAppDelegate.m */,
 				5D79A7AC19703012009F33AA /* Main.storyboard */,
+				5D79A7D5197032CE009F33AA /* Login */,
 				5D79A7AF19703012009F33AA /* KHFirstViewController.h */,
 				5D79A7B019703012009F33AA /* KHFirstViewController.m */,
 				5D79A7B219703012009F33AA /* KHSecondViewController.h */,
@@ -131,6 +144,8 @@
 		5D79A7A119703012009F33AA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5DCCA5581971A97C001CDE38 /* KHConstants.h */,
+				5DCCA5591971A97C001CDE38 /* KHConstants.m */,
 				5D79A7A219703012009F33AA /* MatchedUp-Info.plist */,
 				5D79A7A319703012009F33AA /* InfoPlist.strings */,
 				5D79A7A619703012009F33AA /* main.m */,
@@ -157,6 +172,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5D79A7D5197032CE009F33AA /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5D79A7D2197032AE009F33AA /* KHLoginViewController.h */,
+				5D79A7D3197032AE009F33AA /* KHLoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,9 +188,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5D79A7CC19703012009F33AA /* Build configuration list for PBXNativeTarget "MatchedUp" */;
 			buildPhases = (
+				4E4AFA40DBF3409890AB88E2 /* Check Pods Manifest.lock */,
 				5D79A79319703012009F33AA /* Sources */,
 				5D79A79419703012009F33AA /* Frameworks */,
 				5D79A79519703012009F33AA /* Resources */,
+				FAEFE5DA431A484A8DC94BFE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -250,12 +276,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4E4AFA40DBF3409890AB88E2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FAEFE5DA431A484A8DC94BFE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5D79A79319703012009F33AA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DCCA55A1971A97C001CDE38 /* KHConstants.m in Sources */,
 				5D79A7A719703012009F33AA /* main.m in Sources */,
+				5D79A7D4197032AE009F33AA /* KHLoginViewController.m in Sources */,
 				5D79A7B419703012009F33AA /* KHSecondViewController.m in Sources */,
 				5D79A7AB19703012009F33AA /* KHAppDelegate.m in Sources */,
 				5D79A7B119703012009F33AA /* KHFirstViewController.m in Sources */,
@@ -380,6 +441,7 @@
 		};
 		5D79A7CD19703012009F33AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FDB8757FF334EBE976C4A38 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -393,6 +455,7 @@
 		};
 		5D79A7CE19703012009F33AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FDB8757FF334EBE976C4A38 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -463,6 +526,7 @@
 				5D79A7CE19703012009F33AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5D79A7CF19703012009F33AA /* Build configuration list for PBXNativeTarget "MatchedUpTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +535,7 @@
 				5D79A7D119703012009F33AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
