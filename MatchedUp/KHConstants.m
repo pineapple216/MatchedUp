@@ -25,6 +25,6 @@ NSString *const kKHUserProfilePictureURL    = @"pictureURL";
 
 NSString *const kKHPhotoClassKey            = @"Photo";
 NSString *const kKHPhotoUserKey             = @"user";
-NSString *const kKhPhotoPictureKey          = @"image";
+NSString *const kKHPhotoPictureKey          = @"image";
 
 @end

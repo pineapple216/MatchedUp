@@ -33,6 +33,18 @@
     // Do any additional setup after loading the view.
 }
 
+// Check is the user is already logged in and if so, skip directly to the tab bar VC
+-(void)viewDidAppear:(BOOL)animated
+{
+    // Check is the user is already cached and linked to Facebook
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        // If the user has changed information on facebook, reflect it in the application
+        [self updateUserInformation];
+        NSLog(@"The user is already signed in");
+        [self performSegueWithIdentifier:@"loginToTabBarSegue" sender:self];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -100,8 +112,8 @@
             // create URL
             NSString *facebookID = userDictionary[@"id"];
             
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-            
+            // URL to get a picture from Facebook
+            NSURL *pictureURL = [NSURL URLWithString: [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
             
             NSMutableDictionary *userProfile = [[NSMutableDictionary alloc]initWithCapacity:8];
             
@@ -132,6 +144,9 @@
             // add the userProfile dictionary to it and save it asynchronously
             [[PFUser currentUser] setObject:userProfile forKey:kKHUserProfileKey];
             [[PFUser currentUser]saveInBackground];
+            
+            // Call the method request image to get an image for the user
+            [self requestImage];
         }
         // If we do get an error...
         else {
@@ -141,7 +156,7 @@
     }];
 }
 
-// Method to upload a file to parse
+// Helper Method to upload a UIImage file to parse
 -(void)uploadPFFileToParse:(UIImage *)image
 {
     // JPEG to decrease file size and enable faster uploads & downloads
@@ -152,8 +167,87 @@
         return;
     }
     
+    PFFile *photoFile = [PFFile fileWithData:imageData];
     
+    // Save the file to Parse
+    [photoFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Photo uploaded succesfully");
+            // kKHPhotoClassKey == "Photo"
+            PFObject *photo = [PFObject objectWithClassName:kKHPhotoClassKey];
+            
+            // Setup a key-value pair so the photo object knows which user belongs to it
+            [photo setObject:[PFUser currentUser] forKey:kKHPhotoUserKey];
+            
+            [photo setObject:photoFile forKey:kKHPhotoPictureKey];
+            
+            // Save the photo
+            [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                NSLog(@"Photo saved succesfully");
+            }];
+        }
+        if (error) {
+            NSLog(@"Error uploading image to Parse: %@", error);
+        }
+    }];
 }
+
+// Helper method to hit the URL and get a photo from Parse
+-(void)requestImage
+{
+    PFQuery *query = [PFQuery queryWithClassName:kKHPhotoClassKey];
+    // Only get the photo from the current user
+    [query whereKey:kKHPhotoUserKey equalTo:[PFUser currentUser]];
+    
+    // Check is the user already has a photo saved, by counting the objects in the query object
+    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
+        if (number == 0)
+        {
+            PFUser *user = [PFUser currentUser];
+            self.imageData = [[NSMutableData alloc]init];
+            
+            // Create the profilePictureURL from the user dictionary
+            NSURL *profilePictureURL = [NSURL URLWithString:user[kKHUserProfileKey][kKHUserProfilePictureURL]];
+            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:profilePictureURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:4.0f];
+            
+            // Run the request asynchronously
+            NSURLConnection *urlConnection = [[NSURLConnection alloc]initWithRequest:urlRequest delegate:self];
+            
+            // If we did not get an url connection...
+            if (!urlConnection) {
+                NSLog(@"Failed to Download Picture");
+            }
+        }
+    }];
+}
+
+#pragma mark - NSURLConnectionDataDelegate
+
+-(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    // As chuncks of the image are received, we build our data file
+    [self.imageData appendData:data];
+}
+
+// Set the image once the downloading of the image is complete
+-(void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    // All data has been downloaded, now we can set the image in the header image view
+    UIImage *profileImage = [UIImage imageWithData:self.imageData];
+    
+    // Save the image to Parse
+    [self uploadPFFileToParse:profileImage];
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

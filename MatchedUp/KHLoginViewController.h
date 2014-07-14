@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface KHLoginViewController : UIViewController
+@interface KHLoginViewController : UIViewController <NSURLConnectionDataDelegate>
 
 @end

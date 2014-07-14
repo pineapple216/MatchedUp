@@ -26,6 +26,6 @@ extern NSString *const kKHUserProfilePictureURL;
 
 extern NSString *const kKHPhotoClassKey;
 extern NSString *const kKHPhotoUserKey;
-extern NSString *const kKhPhotoPictureKey;
+extern NSString *const kKHPhotoPictureKey;
 
 @end
