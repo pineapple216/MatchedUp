@@ -35,6 +35,12 @@
             [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                 NSLog(@"got image");
                 self.profilePictureImageView.image = [UIImage imageWithData:data];
+                
+                // Log error to console if we get back an error
+                if (error) {
+                    NSLog(@"Error getting image %@", error);
+                }
+                
             }];
         }
         if (error) {
