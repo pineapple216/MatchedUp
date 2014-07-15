@@ -14,8 +14,6 @@
 		5D79A7A719703012009F33AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A7A619703012009F33AA /* main.m */; };
 		5D79A7AB19703012009F33AA /* KHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A7AA19703012009F33AA /* KHAppDelegate.m */; };
 		5D79A7AE19703012009F33AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D79A7AC19703012009F33AA /* Main.storyboard */; };
-		5D79A7B119703012009F33AA /* KHFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A7B019703012009F33AA /* KHFirstViewController.m */; };
-		5D79A7B419703012009F33AA /* KHSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D79A7B319703012009F33AA /* KHSecondViewController.m */; };
 		5D79A7B619703012009F33AA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D79A7B519703012009F33AA /* Images.xcassets */; };
 		5D79A7BD19703012009F33AA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A7BC19703012009F33AA /* XCTest.framework */; };
 		5D79A7BE19703012009F33AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79A19703012009F33AA /* Foundation.framework */; };
@@ -49,10 +47,6 @@
 		5D79A7A919703012009F33AA /* KHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KHAppDelegate.h; sourceTree = "<group>"; };
 		5D79A7AA19703012009F33AA /* KHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KHAppDelegate.m; sourceTree = "<group>"; };
 		5D79A7AD19703012009F33AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5D79A7AF19703012009F33AA /* KHFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KHFirstViewController.h; sourceTree = "<group>"; };
-		5D79A7B019703012009F33AA /* KHFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KHFirstViewController.m; sourceTree = "<group>"; };
-		5D79A7B219703012009F33AA /* KHSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KHSecondViewController.h; sourceTree = "<group>"; };
-		5D79A7B319703012009F33AA /* KHSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KHSecondViewController.m; sourceTree = "<group>"; };
 		5D79A7B519703012009F33AA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5D79A7BB19703012009F33AA /* MatchedUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatchedUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D79A7BC19703012009F33AA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -131,10 +125,6 @@
 				5D79A7AA19703012009F33AA /* KHAppDelegate.m */,
 				5D79A7AC19703012009F33AA /* Main.storyboard */,
 				5D79A7D5197032CE009F33AA /* Login */,
-				5D79A7AF19703012009F33AA /* KHFirstViewController.h */,
-				5D79A7B019703012009F33AA /* KHFirstViewController.m */,
-				5D79A7B219703012009F33AA /* KHSecondViewController.h */,
-				5D79A7B319703012009F33AA /* KHSecondViewController.m */,
 				5D79A7B519703012009F33AA /* Images.xcassets */,
 				5D79A7A119703012009F33AA /* Supporting Files */,
 			);
@@ -317,9 +307,7 @@
 				5DCCA55A1971A97C001CDE38 /* KHConstants.m in Sources */,
 				5D79A7A719703012009F33AA /* main.m in Sources */,
 				5D79A7D4197032AE009F33AA /* KHLoginViewController.m in Sources */,
-				5D79A7B419703012009F33AA /* KHSecondViewController.m in Sources */,
 				5D79A7AB19703012009F33AA /* KHAppDelegate.m in Sources */,
-				5D79A7B119703012009F33AA /* KHFirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

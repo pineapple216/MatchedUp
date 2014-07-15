@@ -113,7 +113,8 @@
             NSString *facebookID = userDictionary[@"id"];
             
             // URL to get a picture from Facebook
-            NSURL *pictureURL = [NSURL URLWithString: [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
+            NSURL *pictureURL = [NSURL URLWithString: [NSString
+            stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
             
             NSMutableDictionary *userProfile = [[NSMutableDictionary alloc]initWithCapacity:8];
             
@@ -144,6 +145,8 @@
             // add the userProfile dictionary to it and save it asynchronously
             [[PFUser currentUser] setObject:userProfile forKey:kKHUserProfileKey];
             [[PFUser currentUser]saveInBackground];
+            
+            NSLog(@"User information updated");
             
             // Call the method request image to get an image for the user
             [self requestImage];
