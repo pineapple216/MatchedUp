@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5D4D2EFE1975ABA5006A2EEE /* KHEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D2EFD1975ABA5006A2EEE /* KHEditProfileViewController.m */; };
+		5D631EF11983C5B00042DAB9 /* KHTestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D631EF01983C5B00042DAB9 /* KHTestUser.m */; };
 		5D79A79B19703012009F33AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79A19703012009F33AA /* Foundation.framework */; };
 		5D79A79D19703012009F33AA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79C19703012009F33AA /* CoreGraphics.framework */; };
 		5D79A79F19703012009F33AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79E19703012009F33AA /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		5D4D2EFC1975ABA5006A2EEE /* KHEditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KHEditProfileViewController.h; sourceTree = "<group>"; };
 		5D4D2EFD1975ABA5006A2EEE /* KHEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHEditProfileViewController.m; sourceTree = "<group>"; };
+		5D631EEF1983C5B00042DAB9 /* KHTestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KHTestUser.h; sourceTree = "<group>"; };
+		5D631EF01983C5B00042DAB9 /* KHTestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHTestUser.m; sourceTree = "<group>"; };
 		5D79A79719703012009F33AA /* MatchedUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchedUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D79A79A19703012009F33AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5D79A79C19703012009F33AA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -108,6 +111,16 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		5D631EEE1983C5770042DAB9 /* CreateParseUser */ = {
+			isa = PBXGroup;
+			children = (
+				5D631EEF1983C5B00042DAB9 /* KHTestUser.h */,
+				5D631EF01983C5B00042DAB9 /* KHTestUser.m */,
+			);
+			name = CreateParseUser;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		5D79A78E19703012009F33AA = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +164,7 @@
 				5DC44EFA197594B60049BA0A /* Settings */,
 				5D4D2EFB1975AAE6006A2EEE /* EditProfile */,
 				5DEF471119768BA3004CE766 /* Profile */,
+				5D631EEE1983C5770042DAB9 /* CreateParseUser */,
 				5D79A7B519703012009F33AA /* Images.xcassets */,
 				5D79A7A119703012009F33AA /* Supporting Files */,
 			);
@@ -366,6 +380,7 @@
 				5D79A7D4197032AE009F33AA /* KHLoginViewController.m in Sources */,
 				5D79A7AB19703012009F33AA /* KHAppDelegate.m in Sources */,
 				5DC44EF919756DCB0049BA0A /* KHHomeViewController.m in Sources */,
+				5D631EF11983C5B00042DAB9 /* KHTestUser.m in Sources */,
 				5DEF471419768C57004CE766 /* KHProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

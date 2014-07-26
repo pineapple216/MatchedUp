@@ -41,7 +41,7 @@
         // If the user has changed information on facebook, reflect it in the application
         [self updateUserInformation];
         NSLog(@"The user is already signed in");
-        [self performSegueWithIdentifier:@"loginToTabBarSegue" sender:self];
+        [self performSegueWithIdentifier:@"loginToHomeSegue" sender:self];
     }
 }
 
@@ -86,7 +86,7 @@
         // If we did get back a user, call updateUserInformation and segue to the next VC
         else {
             [self updateUserInformation];
-            [self performSegueWithIdentifier:@"loginToTabBarSegue" sender:self];
+            [self performSegueWithIdentifier:@"loginToHomeSegue" sender:self];
         }
         
     }];
@@ -133,9 +133,21 @@
             }
             if (userDictionary[@"birthday"]) {
                 userProfile[kKHUserProfileBirthday] = userDictionary[@"birthday"];
+                
+                // Get the user's age by using an NSDateFormatter
+                NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+                [formatter setDateStyle:NSDateFormatterShortStyle];
+                NSDate *date = [formatter dateFromString:userDictionary[@"birthday"]];
+                NSDate *now = [NSDate date];
+                NSTimeInterval seconds = [now timeIntervalSinceDate: date];
+                int age = seconds / 31536000;
+                userProfile[kKHUserProfileAgeKey] = @(age);
             }
             if (userDictionary[@"interested_in"]) {
                 userProfile[kKHUserProfileInterestedIn] = userDictionary[@"interested_in"];
+            }
+            if (userDictionary[@"relationship_status"]) {
+                userProfile[kKHUserProfileRelationshipStatusKey] = userDictionary[@"relationship_status"];
             }
             if ([pictureURL absoluteString]) {
                 userProfile[kKHUserProfilePictureURL] = [pictureURL absoluteString];
