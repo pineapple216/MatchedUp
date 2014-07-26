@@ -10,4 +10,6 @@
 
 @interface KHTestUser : NSObject
 
++(void)saveTestUserToParse;
+
 @end

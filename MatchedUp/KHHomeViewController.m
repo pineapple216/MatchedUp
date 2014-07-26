@@ -7,6 +7,7 @@
 //
 
 #import "KHHomeViewController.h"
+#import "KHTestUser.h"
 
 @interface KHHomeViewController ()
 
@@ -49,6 +50,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // Save a new test user to Parse
+    //[KHTestUser saveTestUserToParse];
+    
     // Don't allow the user to immediately press the 3 buttons
     self.likeButton.enabled = NO;
     self.infoButton.enabled = NO;
@@ -59,6 +63,10 @@
     
     // Get all the objects saved to the photo class
     PFQuery *query = [PFQuery queryWithClassName:kKHPhotoClassKey];
+    
+    // Exclude photos from the current User; we don't want to like/dislike ourselves
+    [query whereKey:kKHPhotoUserKey notEqualTo:[PFUser currentUser]];
+    
     // Also download the user object executing the query
     [query includeKey:kKHPhotoUserKey];
     

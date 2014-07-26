@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5D4D2EFE1975ABA5006A2EEE /* KHEditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4D2EFD1975ABA5006A2EEE /* KHEditProfileViewController.m */; };
 		5D631EF11983C5B00042DAB9 /* KHTestUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D631EF01983C5B00042DAB9 /* KHTestUser.m */; };
+		5D631EF31983C9A60042DAB9 /* profileImage1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D631EF21983C9A60042DAB9 /* profileImage1.jpg */; };
 		5D79A79B19703012009F33AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79A19703012009F33AA /* Foundation.framework */; };
 		5D79A79D19703012009F33AA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79C19703012009F33AA /* CoreGraphics.framework */; };
 		5D79A79F19703012009F33AA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D79A79E19703012009F33AA /* UIKit.framework */; };
@@ -45,6 +46,7 @@
 		5D4D2EFD1975ABA5006A2EEE /* KHEditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHEditProfileViewController.m; sourceTree = "<group>"; };
 		5D631EEF1983C5B00042DAB9 /* KHTestUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KHTestUser.h; sourceTree = "<group>"; };
 		5D631EF01983C5B00042DAB9 /* KHTestUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHTestUser.m; sourceTree = "<group>"; };
+		5D631EF21983C9A60042DAB9 /* profileImage1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = profileImage1.jpg; sourceTree = "<group>"; };
 		5D79A79719703012009F33AA /* MatchedUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchedUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D79A79A19703012009F33AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5D79A79C19703012009F33AA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -174,6 +176,7 @@
 		5D79A7A119703012009F33AA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5D631EF21983C9A60042DAB9 /* profileImage1.jpg */,
 				5DCCA5581971A97C001CDE38 /* KHConstants.h */,
 				5DCCA5591971A97C001CDE38 /* KHConstants.m */,
 				5D79A7A219703012009F33AA /* MatchedUp-Info.plist */,
@@ -320,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D79A7B619703012009F33AA /* Images.xcassets in Resources */,
+				5D631EF31983C9A60042DAB9 /* profileImage1.jpg in Resources */,
 				5D79A7A519703012009F33AA /* InfoPlist.strings in Resources */,
 				5D79A7AE19703012009F33AA /* Main.storyboard in Resources */,
 			);
