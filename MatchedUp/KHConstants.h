@@ -42,4 +42,13 @@ extern NSString *const kKHActivityPhotoKey;
 extern NSString *const kKHActivityTypeLikeKey;
 extern NSString *const kKHActivityTypeDislikeKey;
 
+#pragma mark - Settings
+
+extern NSString *const kKHMenEnabledKey;
+extern NSString *const kKHWomenEnabledKey;
+extern NSString *const kKHSingleEnabledKey;
+extern NSString *const kKHMaxAgeKey;
+
+
+
 @end

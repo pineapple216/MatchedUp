@@ -1,22 +1,25 @@
 //
-//  KHEditProfileViewController.m
+//  KHMatchViewController.m
 //  MatchedUp
 //
-//  Created by Koen Hendriks on 15/07/14.
+//  Created by Koen Hendriks on 27/07/14.
 //  Copyright (c) 2014 Koen Hendriks. All rights reserved.
 //
 
-#import "KHEditProfileViewController.h"
+#import "KHMatchViewController.h"
 
-@interface KHEditProfileViewController ()
+@interface KHMatchViewController ()
 
-@property (strong, nonatomic) IBOutlet UITextView *tagLineTextView;
-@property (strong, nonatomic) IBOutlet UIImageView *profilePictureImageView;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveBarButtonItem;
+
+@property (strong, nonatomic) IBOutlet UIImageView *matchedUserImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *currentUserImageView;
+
+@property (strong, nonatomic) IBOutlet UIButton *viewChatsButton;
+@property (strong, nonatomic) IBOutlet UIButton *keepSearchingButton;
 
 @end
 
-@implementation KHEditProfileViewController
+@implementation KHMatchViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,22 +35,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // Get the picture of ourselves, the current user and show it on the imageView
+    // Get the photo of the current user to display it next to the user we matched
     PFQuery *query = [PFQuery queryWithClassName:kKHPhotoClassKey];
     [query whereKey:kKHPhotoUserKey equalTo:[PFUser currentUser]];
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if ([objects count] > 0 ) {
-            // Get the photo object from the objects array
+        if ([objects count] > 0) {
             PFObject *photo = objects[0];
-            // Get the actual picture
             PFFile *pictureFile = photo[kKHPhotoPictureKey];
             [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                self.profilePictureImageView.image = [UIImage imageWithData:data];
+                self.currentUserImageView.image = [UIImage imageWithData:data];
+                self.matchedUserImageView.image = self.matchedUserImage;
             }];
         }
     }];
-    self.tagLineTextView.text = [[PFUser currentUser] objectForKey:kKHUserTagLineKey];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,18 +58,18 @@
 
 #pragma mark - IBActions
 
-- (IBAction)saveBarButtonItemPressed:(UIBarButtonItem *)sender
+// If we want to view all the chats with other users, call the delegate method presentMatchesViewController
+- (IBAction)viewChatsButtonPressed:(UIButton *)sender
 {
-    // Save the text in the tagline textview to Parse and pop the current VC
-    [[PFUser currentUser] setObject:self.tagLineTextView.text forKey:kKHUserTagLineKey];
-    [[PFUser currentUser]saveInBackground];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate presentMatchesViewController];
 }
 
-
-
-
-
+// If the user doesn't want to chat with the matched user, but wants to keep looking for more matches/users,
+// dismiss the current VC
+- (IBAction)keepSearchingButtonPressed:(UIButton *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 
 

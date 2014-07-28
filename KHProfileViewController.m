@@ -33,6 +33,19 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    PFFile *pictureFile = self.photo[kKHPhotoPictureKey];
+    [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        // Set the imageView's image to be the data that we get back from Parse
+        self.profilePictureImageView.image = [UIImage imageWithData:data];
+    }];
+    // Create a new user object; the user that belongs to the photo and update the labels
+    PFUser *user = self.photo[kKHPhotoUserKey];
+    self.locationLabel.text = user[kKHUserProfileKey][kKHUserProfileLocation];
+    self.ageLabel.text = [NSString stringWithFormat:@"%@", user[kKHUserProfileKey][kKHUserProfileAgeKey]];
+    self.statusLabel.text = user[kKHUserProfileKey][kKHUserProfileRelationshipStatusKey];
+    self.tagLineLabel.text = user[kKHUserTagLineKey];
+    
 }
 
 - (void)didReceiveMemoryWarning

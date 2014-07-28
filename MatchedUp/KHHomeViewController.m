@@ -8,8 +8,10 @@
 
 #import "KHHomeViewController.h"
 #import "KHTestUser.h"
+#import "KHProfileViewController.h"
+#import "KHMatchViewController.h"
 
-@interface KHHomeViewController ()
+@interface KHHomeViewController () <KHMatchViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *chatBarButtonItem;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *settingsBarButtonItem;
@@ -93,6 +95,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"homeToProfileSegue"])
+    {
+        KHProfileViewController *ProfileVC = segue.destinationViewController;
+        ProfileVC.photo = self.photo;
+    }
+    // Check if the Segue is the homeToMatchSegue
+    else if ([segue.identifier isEqualToString:@"homeToMatchSegue"])
+    {
+        KHMatchViewController *matchVC = segue.destinationViewController;
+        // Pass the photo from the photoImageView to the matchVC
+        matchVC.matchedUserImage = self.photoImageView.image;
+        matchVC.delegate = self;
+    }
+}
+
 #pragma mark - IBActions
 
 - (IBAction)likeButtonPressed:(UIButton *)sender
@@ -107,7 +126,8 @@
 
 - (IBAction)infoButtonPressed:(UIButton *)sender
 {
-    
+    // Segue to the profile view controller
+    [self performSegueWithIdentifier:@"homeToProfileSegue" sender:nil];
 }
 
 - (IBAction)settingsBarButtonItemPressed:(UIBarButtonItem *)sender
@@ -186,6 +206,7 @@
                 }
                 self.likeButton.enabled = YES;
                 self.dislikeButton.enabled = YES;
+                self.infoButton.enabled = YES;
             }
         }];
     }
@@ -232,6 +253,7 @@
         
         // Add the activity to the activities array and setup the next photo
         [self.activities addObject:likeActivity];
+        [self checkForPhotoUserLikes];
         [self setupNextPhoto];
     }];
 }
@@ -300,6 +322,75 @@
         [self saveDislike];
     }
 }
+
+
+-(void)checkForPhotoUserLikes
+{
+    PFQuery *query = [PFQuery queryWithClassName:kKHActivityClassKey];
+    // Query Constraints
+    // Constrain the query to get the activity from the user that owns the photo I'm viewing
+    [query whereKey:kKHActivityFromUserKey equalTo:self.photo[kKHPhotoUserKey]];
+    // Only get activity if the user we're viewing also likes me
+    [query whereKey:kKHActivityToUserKey equalTo:[PFUser currentUser]];
+    // Only get back likes, not dislikes
+    [query whereKey:kKHActivityTypeKey equalTo:kKHActivityTypeLikeKey];
+    // Execute the query
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error getting likes: %@", error);
+        }
+        if ([objects count] > 0) {
+            // Create our chatroom here...
+            [self createChatRoom];
+        }
+    }];
+}
+
+
+// Method to create the chatroom
+-(void)createChatRoom
+{
+    PFQuery *queryForChatRoom = [PFQuery queryWithClassName:@"ChatRoom"];
+    // Get all the chatrooms, where user1 is the current user
+    [queryForChatRoom whereKey:@"user1" equalTo:[PFUser currentUser]];
+    // user2 is equal to the user we're currently viewing the photo of
+    [queryForChatRoom whereKey:@"user2" equalTo:self.photo[kKHPhotoUserKey]];
+    
+    // Since the current user can also be in the user2 column, create another query to get back
+    // all the chatrooms (if we like another user first and that user likes me thereafter)
+    PFQuery *queryForChatRoomInverse = [PFQuery queryWithClassName:@"ChatRoom"];
+    
+    [queryForChatRoomInverse whereKey:@"user1" equalTo:self.photo[kKHPhotoUserKey]];
+    [queryForChatRoomInverse whereKey:@"user2" equalTo:[PFUser currentUser]];
+    
+    // Combine the two queries
+    PFQuery *combinedQuery = [PFQuery orQueryWithSubqueries:@[queryForChatRoom, queryForChatRoomInverse]];
+    [combinedQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if ([objects count] > 0) {
+            PFObject *chatroom = [PFObject objectWithClassName:@"ChatRoom"];
+            [chatroom setObject:[PFUser currentUser] forKey:@"user1"];
+            [chatroom setObject:self.photo[kKHPhotoUserKey] forKey:@"user2"];
+            [chatroom saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                // When we indeed have a match, go to the match VC
+                [self performSegueWithIdentifier:@"homeToMatchSegue" sender:nil];
+            }];
+        }
+    }];
+    
+}
+
+#pragma mark KHMatchViewControllerDelegate
+
+-(void)presentMatchesViewController
+{
+    // Dismiss the MatchVC...
+    [self dismissViewControllerAnimated:NO completion:^{
+        // ... and while at the home VC, transition to the MatchesVC
+        [self performSegueWithIdentifier:@"homeToMatchesSegue" sender:nil];
+    }];
+}
+
+
 
 /*
 #pragma mark - Navigation
