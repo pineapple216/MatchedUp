@@ -38,7 +38,7 @@
                         [photo setObject:newUser forKey:kKHPhotoUserKey];
                         [photo setObject:photoFile forKey:kKHPhotoPictureKey];
                         [photo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            NSLog(@"Photo saved succesfully!");
+                            NSLog(@"Test User photo saved succesfully!");
                             if (error) {
                                 NSLog(@"Error saving photo: %@", error);
                             }
