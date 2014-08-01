@@ -8,6 +8,9 @@
 
 #import "JSMessagesViewController.h"
 
-@interface KHChatViewController : JSMessagesViewController
+@interface KHChatViewController : JSMessagesViewController <JSMessagesViewDataSource, JSMessagesViewDelegate>
+
+@property (strong, nonatomic) PFObject *chatRoom;
+
 
 @end

@@ -245,16 +245,24 @@
     [likeActivity setObject:[PFUser currentUser] forKey:kKHActivityFromUserKey];
     // Which user owns the photo? Save the user that we liked
     [likeActivity setObject:[self.photo objectForKey:kKHPhotoUserKey] forKey:kKHActivityToUserKey];
-    [likeActivity setObject:self.photo forKey:kKHPhotoClassKey];
+    [likeActivity setObject:self.photo forKey:kKHActivityPhotoKey];
     [likeActivity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        // After saving...
-        self.isLikedByCurrentUser = YES;
-        self.isDislikedByCurrentUser = NO;
+        if (!error) {
+            // After saving...
+            self.isLikedByCurrentUser = YES;
+            self.isDislikedByCurrentUser = NO;
+            
+            NSLog(@"Succesfully saved like!");
+            
+            // Add the activity to the activities array and setup the next photo
+            [self.activities addObject:likeActivity];
+            [self checkForPhotoUserLikes];
+            [self setupNextPhoto];
+        }
+        else{
+            NSLog(@"Error saving like: %@", error);
+        }
         
-        // Add the activity to the activities array and setup the next photo
-        [self.activities addObject:likeActivity];
-        [self checkForPhotoUserLikes];
-        [self setupNextPhoto];
     }];
 }
 
@@ -267,14 +275,21 @@
     // Save the user that likes the photo, the user that owns the photo and the photo itself
     [dislikeActivity setObject:[PFUser currentUser] forKey:kKHActivityFromUserKey];
     [dislikeActivity setObject:[self.photo objectForKey:kKHPhotoUserKey] forKey:kKHActivityToUserKey];
-    [dislikeActivity setObject:self.photo forKey:kKHPhotoClassKey];
+    [dislikeActivity setObject:self.photo forKey:kKHActivityPhotoKey];
     
     [dislikeActivity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        
-        self.isLikedByCurrentUser = NO;
-        self.isDislikedByCurrentUser = YES;
-        [self.activities addObject: dislikeActivity];
-        [self setupNextPhoto];
+        if (!error) {
+            NSLog(@"Succesfully saved dislike");
+            
+            self.isLikedByCurrentUser = NO;
+            self.isDislikedByCurrentUser = YES;
+            [self.activities addObject: dislikeActivity];
+            [self setupNextPhoto];
+        }
+        else{
+            NSLog(@"Error saving dislike: %@", error);
+        }
+
     }];
 }
 
@@ -342,6 +357,7 @@
         if ([objects count] > 0) {
             // Create our chatroom here...
             [self createChatRoom];
+            NSLog(@"Created a chatRoom");
         }
     }];
 }
@@ -359,7 +375,6 @@
     // Since the current user can also be in the user2 column, create another query to get back
     // all the chatrooms (if we like another user first and that user likes me thereafter)
     PFQuery *queryForChatRoomInverse = [PFQuery queryWithClassName:@"ChatRoom"];
-    
     [queryForChatRoomInverse whereKey:@"user1" equalTo:self.photo[kKHPhotoUserKey]];
     [queryForChatRoomInverse whereKey:@"user2" equalTo:[PFUser currentUser]];
     
@@ -387,6 +402,7 @@
     [self dismissViewControllerAnimated:NO completion:^{
         // ... and while at the home VC, transition to the MatchesVC
         [self performSegueWithIdentifier:@"homeToMatchesSegue" sender:nil];
+        NSLog(@"Transition from home VC to Matches VC");
     }];
 }
 
